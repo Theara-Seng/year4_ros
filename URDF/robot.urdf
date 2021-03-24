@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+
+<robot name="mobile_robot">
+
+	<link name="base_link">
+		<visual>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<geometry>
+			<cylinder length="0.02" radius="0.15"/>
+		</geometry>
+		<material name="black">
+			<color rgba="0.0 0.0 0.0 1.0" />
+		</material>
+		</visual>
+	</link>
+    
+    <link name="left_wheel">
+		<visual>
+		<origin rpy="0 1.57 0" xyz="0 0 0"/>
+		<geometry>
+			<cylinder length="0.02" radius="0.04"/>
+		</geometry>
+
+		</visual>
+	</link>
+	<joint name="joint1" type="continuous" >
+		<origin xyz="-0.15 0.0 0.0"/>
+		<parent link="base_link"/>
+		<child link="left_wheel"/>
+		<axis xyz="1 0 0" />
+		<limit effort="300" velocity="0.5" lower="-3.14" upper="3.14"/>
+	</joint>
+	
+	 <link name="right_wheel">
+		<visual>
+		<origin rpy="0 1.57 0" xyz="0 0 0"/>
+		<geometry>
+			<cylinder length="0.02" radius="0.04"/>
+		</geometry>
+
+		</visual>
+	</link>
+	<joint name="joint2" type="continuous" >
+		<origin xyz="0.15 0.0 0.0"/>
+		<parent link="base_link"/>
+		<child link="right_wheel"/>
+		<axis xyz="1 0 0" />
+		<limit effort="300" velocity="0.5" lower="-3.14" upper="3.14"/>
+	</joint>
+	<link name="caster">
+		<visual>
+		<origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+		<geometry>
+			<sphere radius="0.02" />
+		</geometry>
+
+		</visual>
+	</link>
+	<joint name="joint3" type="continuous" >
+		<origin xyz="0.0 0.12 -0.02"/>
+		<parent link="base_link"/>
+		<child link="caster"/>
+		<axis xyz="1 0 0" />
+		<limit effort="300" velocity="0.5" lower="-3.14" upper="3.14"/>
+	</joint>
+		
+	
+</robot>
