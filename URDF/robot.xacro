@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot"  >
+
+<!-- property of base_link -->
+<xacro:property name="base_link_length" value="0.02"/>
+<xacro:property name="base_link_radius" value="0.15"/>
+
+<!-- property of wheel-->
+<xacro:property name="wheel_pitch" value="1.57"/>
+<xacro:property name="wheel_length" value="0.02"/>
+<xacro:property name="wheel_radius" value="0.04"/>
+
+<!-- propery of wheel_joint-->
+<xacro:property name="wheel_joint" value="0.15"/>
+<xacro:property name="wheel_axis" value="1"/>
+<xacro:property name="effort" value="300"/>
+<xacro:property name="velocity" value="0.5"/>
+<xacro:property name="lower" value="-3.14"/>
+<xacro:property name="upper" value="3.14"/>
+
+<!-- property of caster-->
+<xacro:property name="caster_radius" value="0.02"/>
+<xacro:property name="caster_joint_y" value="0.12"/>
+<xacro:property name="caster_joint_z" value="0.02"/>
+<link name="base_link">
+	<visual>
+		<origin rpy="0 0 0" xyz="0 0 0"/>		
+		<geometry>
+			<cylinder length="${base_link_length}" radius="${base_link_radius}" />
+		</geometry>
+	</visual>
+</link>
+
+<link name="left_wheel">
+	<visual>
+		<origin rpy="0 ${wheel_pitch} 0" xyz="0 0 0"/>
+		<geometry>
+			<cylinder length="${wheel_length}" radius="${wheel_radius}"/>
+		</geometry>
+	</visual>
+</link>
+
+<joint  name="base_link_left_wheel" type="continuous">
+	<origin xyz="${-wheel_joint} 0 0" />
+	<parent link="base_link"/>
+	<child link="left_wheel"/>
+	<axis xyz="${wheel_axis} 0 0 "/>
+	<limit effort="${effort}" velocity="${velocity}" lower="${lower}" upper="${upper}"/>
+</joint>
+
+<link name="right_wheel">
+	<visual>
+		<origin rpy="0 ${wheel_pitch} 0" xyz="0 0 0"/>
+		<geometry>
+			<cylinder length="${wheel_length}" radius="${wheel_radius}"/>
+		</geometry>
+	</visual>
+</link>
+
+<joint  name="base_link_right_wheel" type="continuous">
+	<origin xyz="${wheel_joint} 0 0" />
+	<parent link="base_link"/>
+	<child link="right_wheel"/>
+	<axis xyz="${wheel_axis} 0 0 "/>
+	<limit effort="${effort}" velocity="${velocity}" lower="${lower}" upper="${upper}"/>
+</joint>
+<link name="caster">
+	<visual>
+		<origin rpy="0 ${wheel_pitch} 0" xyz="0 0 0"/>
+		<geometry>
+			<sphere radius="${caster_radius}"/>
+		</geometry>
+	</visual>
+</link>
+<joint name="base_link_caster" type="continuous">
+	<origin xyz="0 ${caster_joint_y} ${-caster_joint_z}"/>
+	<parent link="base_link"/>
+	<child link="caster"/>
+	<axis xyz="${wheel_axis} 0 0 "/>
+	<limit effort="${effort}" velocity="${velocity}" lower="${lower}" upper="${upper}"/>
+</joint>
+</robot>

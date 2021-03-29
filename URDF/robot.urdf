@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 
 <robot name="mobile_robot">
-
+    <link name="dummy">
+   </link>
 	<link name="base_link">
 		<visual>
 		<origin rpy="0 0 0" xyz="0 0 0"/>
@@ -12,16 +13,41 @@
 			<color rgba="0.0 0.0 0.0 1.0" />
 		</material>
 		</visual>
+		 <collision>
+      			<origin rpy="0 0 0 " xyz="0 0 0"/>
+      			<geometry>
+       				 <cylinder length="0.02" radius="0.15"/>
+     		   </geometry>
+    	</collision>
+   		 <inertial>
+     		 <mass value="2.5"/>
+      		 <origin xyz="0 0 0"/>
+     		 <inertia ixx="0.00108333333333" ixy="0" ixz="0" iyy="0.00108333333333" iyz="0" izz="0.002"/>
+  		</inertial>
 	</link>
-    
+     <joint name="dummy_joint" type="fixed">
+     <parent link="dummy"/>
+     <child link="base_link"/>
+   </joint>
     <link name="left_wheel">
 		<visual>
 		<origin rpy="0 1.57 0" xyz="0 0 0"/>
 		<geometry>
 			<cylinder length="0.02" radius="0.04"/>
 		</geometry>
-
 		</visual>
+		 <collision>
+      			<origin rpy="0 1.57 0 " xyz="0 0 0"/>
+      			<geometry>
+       				 <cylinder length="0.02" radius="0.04"/>
+     		   </geometry>
+    	</collision>
+   		 <inertial>
+     		 <mass value="2.5"/>
+      		 <origin xyz="0 0 0"/>
+     		 <inertia ixx="0.00108333333333" ixy="0" ixz="0" iyy="0.00108333333333" iyz="0" izz="0.002"/>
+  		</inertial>
+		
 	</link>
 	<joint name="joint1" type="continuous" >
 		<origin xyz="-0.15 0.0 0.0"/>
@@ -37,8 +63,19 @@
 		<geometry>
 			<cylinder length="0.02" radius="0.04"/>
 		</geometry>
-
+	
 		</visual>
+		 <collision>
+      			<origin rpy="0 1.57 0 " xyz="0 0 0"/>
+      			<geometry>
+       				 <cylinder length="0.02" radius="0.04"/>
+     		   </geometry>
+    	</collision>
+   		 <inertial>
+     		 <mass value="2.5"/>
+      		 <origin xyz="0 0 0"/>
+     		 <inertia ixx="0.00108333333333" ixy="0" ixz="0" iyy="0.00108333333333" iyz="0" izz="0.002"/>
+  		</inertial>		
 	</link>
 	<joint name="joint2" type="continuous" >
 		<origin xyz="0.15 0.0 0.0"/>
@@ -55,6 +92,17 @@
 		</geometry>
 
 		</visual>
+		 <collision>
+      			<origin rpy="0 01.57 0 " xyz="0 0 0"/>
+      			<geometry>
+       				 <sphere radius="0.02"/>
+     		   </geometry>
+    	</collision>
+   		 <inertial>
+     		 <mass value="2.5"/>
+      		 <origin xyz="0 0 0"/>
+     		 <inertia ixx="0.00108333333333" ixy="0" ixz="0" iyy="0.00108333333333" iyz="0" izz="0.002"/>
+  		</inertial>
 	</link>
 	<joint name="joint3" type="continuous" >
 		<origin xyz="0.0 0.12 -0.02"/>
