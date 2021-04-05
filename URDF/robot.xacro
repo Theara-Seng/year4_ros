@@ -5,6 +5,9 @@
 <xacro:property name="base_link_length" value="0.02"/>
 <xacro:property name="base_link_radius" value="0.15"/>
 
+<!-- property of laser_scan-->
+<xacro:property name="joint_y_laser_scan" value="0.1"/>
+<xacro:property name="joint_z_laser_scan" value="0.03"/>
 <!-- property of wheel-->
 <xacro:property name="wheel_pitch" value="1.57"/>
 <xacro:property name="wheel_length" value="0.02"/>
@@ -28,6 +31,8 @@
 <xacro:property name="ixx" value="0.01"/>
 <xacro:property name="iyy" value="0.01"/>
 <xacro:property name="izz" value="0.01"/>
+
+<xacro:property name="laser_scan_length" value="0.04"/>
 <link name="dummy" >
 
 </link>
@@ -54,6 +59,8 @@
 		<inertia ixx="${ixx}" ixy="0" ixz="0" iyy="${iyy}" iyz="0" izz="${izz}"/>
 	</inertial>	
 </link>
+
+
 
 <link name="left_wheel">
 	<visual>
@@ -135,5 +142,74 @@
 	<child link="caster"/>
 	<axis xyz="${wheel_axis} 0 0 "/>
 	<limit effort="${effort}" velocity="${velocity}" lower="${lower}" upper="${upper}"/>
+	
 </joint>
+<gazebo  reference="base_link">
+	<material>Gazebo/Black</material>
+	<turnGravityOff>false</turnGravityOff>
+</gazebo>
+<gazebo>
+	<plugin  name="differential_drive_robot" filename="libgazebo_ros_diff_drive.so">
+		<robotNamespace>/</robotNamespace>
+		<commandTopic>cmd_vel</commandTopic>
+		<odometryTopic>odom</odometryTopic>
+		<odometryFrame>odom</odometryFrame>
+		<robotBaseFrame>base_link</robotBaseFrame>
+		<publishWheelTF>false</publishWheelTF>
+		<publishOdomTF>true</publishOdomTF>
+		<publishWheelJointState>false</publishWheelJointState>
+		<legacyMode>true</legacyMode>
+		
+		<wheelSeparation>${2*base_link_radius}</wheelSeparation>
+		<wheelDiameter>${2*wheel_radius}</wheelDiameter>
+		<wheelAcceleration>1.0</wheelAcceleration>
+		<wheelTorque>20.0</wheelTorque>
+		<updateRate>10.0</updateRate>
+		<leftJoint>base_link_left_wheel</leftJoint>
+		<rightJoint>base_link_right_wheel</rightJoint>
+	</plugin>
+
+</gazebo>
+<link name="laser_scan">
+	<visual>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+			<box size="${laser_scan_length} ${laser_scan_length} ${laser_scan_length}"/>
+		</geometry>
+	</visual>
+</link>
+<joint name="base_link_laser_scan" type="fixed">
+	<origin xyz="0 ${joint_y_laser_scan} ${joint_z_laser_scan}" rpy="0 0 0"/>
+	<parent link="base_link"/>
+	<child link="laser_scan"/>
+</joint>
+<gazebo reference="laser_scan">
+	<material>Gazebo/Red</material>
+	<turnGravityOff>false</turnGravityOff>
+	<sensor type="ray" name="laser_scan_sensor">
+		<pose>0 ${laser_scan_length/2} 0 0 0 0 </pose>
+		<visualize>true</visualize>
+		<update_rate>10.0</update_rate>
+		<ray>
+			<scan>
+				<horizontal>
+					<sample>1000</sample>
+					<resolution>1</resolution>
+					<min_angle>0</min_angle>
+					<max_angle>3.14</max_angle>
+				</horizontal>
+			</scan>
+			<range>
+				<min>0.1</min>
+				<max>10</max>
+				<resolution>1</resolution>
+			</range>
+		</ray>
+	
+		<plugin name="lase_scanner" filename="libgazebo_ros_laser.so">
+			<topicName>/scan</topicName>
+			<frameName>laser_scan</frameName>
+		</plugin>
+	</sensor>
+</gazebo>
 </robot>
