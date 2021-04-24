@@ -1,0 +1,6 @@
+# gazebo_rohs_control_params.yaml
+gazebo_ros_control/pid_gains:
+  base_link_left_wheel: {p: 1.0, i: 0.0, d: 1.0}
+  base_link_right_wheel: {p: 1.0, i: 0.0, d: 1.0}
+ 
+ 

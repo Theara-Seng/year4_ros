@@ -144,9 +144,43 @@
 	<limit effort="${effort}" velocity="${velocity}" lower="${lower}" upper="${upper}"/>
 	
 </joint>
+	
 <gazebo  reference="base_link">
 	<material>Gazebo/Black</material>
-	<turnGravityOff>false</turnGravityOff>
+	<mu1 value="1.0"/>
+	<mu2 value="1.0"/>
+	<kp value="10000000.0" />
+	<kd value="1.0" />
+	<fdir1 value="1 0 0"/>
+    <turnGravityOff>false</turnGravityOff>
+</gazebo>
+
+<gazebo  reference="caster">
+	<material>Gazebo/Black</material>
+	<mu1 value="1.0"/>
+	<mu2 value="1.0"/>
+	<kp value="10000000.0" />
+	<kd value="1.0" />
+	<fdir1 value="1 0 0"/>
+    <turnGravityOff>false</turnGravityOff>
+</gazebo>
+<gazebo  reference="right_wheel">
+	<material>Gazebo/Black</material>
+	<mu1 value="1.0"/>
+	<mu2 value="1.0"/>
+	<kp value="10000000.0" />
+	<kd value="1.0" />
+	<fdir1 value="1 0 0"/>
+    <turnGravityOff>false</turnGravityOff>
+</gazebo>
+<gazebo  reference="left_wheel">
+	<material>Gazebo/Black</material>
+	<mu1 value="1.0"/>
+	<mu2 value="1.0"/>
+	<kp value="10000000.0" />
+	<kd value="1.0" />
+	<fdir1 value="1 0 0"/>
+    <turnGravityOff>false</turnGravityOff>
 </gazebo>
 <gazebo>
 	<plugin  name="differential_drive_robot" filename="libgazebo_ros_diff_drive.so">
@@ -170,6 +204,7 @@
 	</plugin>
 
 </gazebo>
+
 <link name="laser_scan">
 	<visual>
 		<origin xyz="0 0 0" rpy="0 0 0"/>

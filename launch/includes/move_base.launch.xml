@@ -1,0 +1,38 @@
+<!-- 
+    ROS navigation stack with velocity smoother and safety (reactive) controller
+-->
+
+<launch>
+
+<!--
+  <include file="$(find diff_wheeled_robot_gazebo)/launch/includes/velocity_smoother.launch.xml"/>
+  <include file="$(find diff_wheeled_robot_gazebo)/launch/includes/safety_controller.launch.xml"/>
+-->
+
+  <arg name="odom_topic" default="odom" />
+
+  
+
+  <!-- Run the map server 
+   <node name="map_server" pkg="map_server" type="map_server" args="$(find summit_description)/maps/hotel.yaml" output="screen"/>-->
+    
+
+
+ <node pkg="tf" type="static_transform_publisher" name="base_laser" args="0 0 0.0 0 0 0.1 base_link laser_scan 10" />
+<node pkg="tf" type="static_transform_publisher" name="laser_broadcasters" args="0 0 0 0 0 0 map odom 100" />
+  <include file="$(find amcl)/examples/amcl_diff.launch" >
+  </include> 
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <param name="controller_frequency" value="10.0"/>
+    <param name="controller_patiente" value="15.0"/>
+    <rosparam file="$(find ITC)/param/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find ITC)/param/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find ITC)/param/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find ITC)/param/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find ITC)/param/config/base_local_planner_params.yaml" command="load" />
+  </node>
+
+
+</launch>
+
