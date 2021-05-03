@@ -1,0 +1,31 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/tadashi/catkin_ws/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/tadashi/catkin_ws/src/testing_itc/include/**",
+        "/home/tadashi/catkin_ws/src/waypoint_nav/hector_slam/hector_mapping_nav/include/**",
+        "/home/tadashi/catkin_ws/src/ipcamera_driver/include/**",
+        "/home/tadashi/catkin_ws/src/geometry2/tf2/include/**",
+        "/home/tadashi/catkin_ws/src/geometry2/tf2_bullet/include/**",
+        "/home/tadashi/catkin_ws/src/geometry2/tf2_eigen/include/**",
+        "/home/tadashi/catkin_ws/src/geometry2/tf2_geometry_msgs/include/**",
+        "/home/tadashi/catkin_ws/src/geometry2/tf2_kdl/include/**",
+        "/home/tadashi/catkin_ws/src/geometry2/tf2_msgs/include/**",
+        "/home/tadashi/catkin_ws/src/geometry2/tf2_ros/include/**",
+        "/home/tadashi/catkin_ws/src/geometry2/tf2_sensor_msgs/include/**",
+        "/home/tadashi/catkin_ws/src/ublox/ublox_gps/include/**",
+        "/home/tadashi/catkin_ws/src/ublox/ublox_msgs/include/**",
+        "/home/tadashi/catkin_ws/src/ublox/ublox_serialization/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}

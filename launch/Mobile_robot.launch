@@ -15,15 +15,16 @@
     <arg name="paused" value="$(arg paused)"/>
     <arg name="use_sim_time" value="$(arg use_sim_time)"/>
     <arg name="headless" value="$(arg headless)"/>
+    <arg name="world_name" value="$(find ITC)/gazebo/will_garage.world"/>
   </include>
 
-
+  <rosparam file="$(find ITC)/YAML/pid.yaml" command="load"/>
 
 
 <!-- urdf xml robot description loaded on the Parameter Server-->  
 
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find ITC)/URDF/robot.xacro"/>
- 
+ <param name="publish_frequency" type="double" value="50.0" /> 
  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
@@ -31,6 +32,6 @@
  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ITC)/rviz/robot.rviz" required="true"/>
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-	args="-urdf -model ITC -param robot_description"/> 
-	
+	args="-urdf -x 0 -y 0 -z -0.1 -model ITC -param robot_description"/> 
+	 
 </launch>
