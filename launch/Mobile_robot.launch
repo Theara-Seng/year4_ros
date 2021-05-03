@@ -18,8 +18,8 @@
     <arg name="world_name" value="$(find ITC)/gazebo/will_garage.world"/>
   </include>
 
+  <rosparam file="$(find ITC)/YAML/pid.yaml" command="load"/>
 
-<rosparam file="$(find ITC)/config/robot.yaml" command="load"/>
 
 <!-- urdf xml robot description loaded on the Parameter Server-->  
 
