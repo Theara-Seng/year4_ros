@@ -24,7 +24,7 @@
 <!-- urdf xml robot description loaded on the Parameter Server-->  
 
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find ITC)/URDF/robot.xacro"/>
- <param name="publish_frequency" type="double" value="50.0" /> 
+  
  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
